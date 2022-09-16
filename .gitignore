@@ -1,0 +1,7 @@
+/.env
+/.github
+/CODEOWNERS
+/docker-compose.yml
+/LICENSE.txt
+/nd0067-c2-creating-an-api-with-postgresql-and-express-project-starter-master.zip
+/node_modules
