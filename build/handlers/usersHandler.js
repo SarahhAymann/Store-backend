@@ -7,16 +7,6 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const users_1 = require("../models/users");
 const store = new users_1.UserStore();
 const create = async (req, res) => {
-    try {
-        const authorizationHeader = req.headers.authorization;
-        const token = authorizationHeader.split(" ")[1];
-        jsonwebtoken_1.default.verify(token, process.env.TOKEN_SECRET);
-    }
-    catch (err) {
-        res.status(401);
-        res.json("Access denied, invalid token");
-        return;
-    }
     const user = {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
@@ -25,7 +15,8 @@ const create = async (req, res) => {
     };
     try {
         const newUser = await store.create(user);
-        res.json(newUser);
+        var token = jsonwebtoken_1.default.sign({ user: newUser }, process.env.TOKEN_SECRET);
+        res.json(token);
     }
     catch (err) {
         res.status(400);
@@ -86,28 +77,10 @@ const destroy = async (req, res) => {
         res.json({ error });
     }
 };
-const login = async (req, res) => {
-    const user = {
-        username: req.body.username,
-        passwordhashed: req.body.password,
-    };
-    console.log(user);
-    try {
-        const u = await store.login(user);
-        console.log(u);
-        var token = jsonwebtoken_1.default.sign({ user: u }, process.env.TOKEN_SECRET);
-        res.json(token);
-    }
-    catch (error) {
-        res.status(401);
-        res.json({ error });
-    }
-};
 const users_routes = (app) => {
     app.get("/users", index);
     app.get("/users/:id", show);
     app.post("/users", create);
-    app.post("/login", login);
     app.delete("/users/:id", destroy);
 };
 exports.default = users_routes;

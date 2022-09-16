@@ -42,16 +42,6 @@ it("show method should return the correct order", async () => {
 });
 it("Should return the active orders by the user", async () => {
     const result = await analysis.currentOrderByUser("2");
+    //it will return and empty list as there is no users with id 2 
     expect(result).toEqual([]);
-});
-it("create method should add a products to an order ", async () => {
-    const quantity = 1;
-    const orderID = "1";
-    const productsID = '1';
-    const result = await store.addProdtuctsToOrder(quantity, orderID, productsID);
-    console.log(result);
-    expect(result).toEqual({ id: 1,
-        order_status: "active",
-        user_id: "1"
-    });
 });

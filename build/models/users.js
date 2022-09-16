@@ -71,27 +71,5 @@ class UserStore {
             throw new Error(`Could not delete this user ${id}. Error: ${err}`);
         }
     }
-    async login(u) {
-        try {
-            // @ts-ignore'
-            const conn = await database_1.default.connect();
-            const sql = "SELECT passwordhashed FROM users WHERE username=($1)";
-            const result = await conn.query(sql, [u.username]);
-            console.log(u.username);
-            conn.release();
-            if (result.rows.length) {
-                const returnedUser = result.rows[0];
-                console.log(returnedUser);
-                console.log(u.passwordhashed + peper);
-                console.log(bcrypt_1.default.compareSync(u.passwordhashed + peper, returnedUser.passwordhashed));
-                if (bcrypt_1.default.compareSync(u.passwordhashed + peper, returnedUser.passwordhashed))
-                    return true;
-            }
-            return false;
-        }
-        catch (err) {
-            throw new Error(`Could not login . Error: ${err}`);
-        }
-    }
 }
 exports.UserStore = UserStore;
