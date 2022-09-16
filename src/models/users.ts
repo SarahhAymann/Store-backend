@@ -90,31 +90,5 @@ export class UserStore {
     }
   }
 
-  async login(u: User): Promise<Boolean> {
-    try {
-      // @ts-ignore'
-      const conn = await Client.connect();
-      const sql = "SELECT passwordhashed FROM users WHERE username=($1)";
-      
-
-      const result = await conn.query(sql, [u.username]);
-      console.log(u.username);
-
-
-      conn.release();
-      if (result.rows.length) {
-        const returnedUser = result.rows[0];
-        console.log(returnedUser);
-        console.log(u.passwordhashed+peper);
-        console.log(bcrypt.compareSync( u.passwordhashed+peper,returnedUser.passwordhashed))
-
-        if (bcrypt.compareSync( u.passwordhashed+peper,returnedUser.passwordhashed)) 
-          return true;
-        
-      }
-      return false;
-    } catch (err) {
-      throw new Error(`Could not login . Error: ${err}`);
-    }
-  }
+  
 }
