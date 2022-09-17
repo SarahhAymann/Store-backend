@@ -7,6 +7,8 @@ CREATE DATABASE store_backend_dev;
 and for testing :store_backend_test
 CREATE DATABASE store_backend_test;
 and port =127.0.0.1
+create a varaible name  ENV = dev 
+
 run the script :npm install 
 to install all the packages 
 the project is running on the port : "0.0.0.0:3000"
