@@ -13,6 +13,15 @@ and for testing :store_backend_test
 to install all the packages 
 //the project is running on the port : "0.0.0.0:3000"
 
+env variables:
+POSTGRES_HOST=127.0.0.1
+POSTGRES_DB=store_backend_dev
+POSTGRES_TEST_DB=store_backend_test
+
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=1234
+ENV= dev
+
 Other env varaible needed to run the project :
 BCRYPT_PASSWORD=your-secret-password
 SALT_ROUNDS=10
